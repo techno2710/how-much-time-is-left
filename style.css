@@ -1,0 +1,145 @@
+:root {
+    --bg: #0d1117;
+    --bg-gradient-a: #161b22;
+    --surface: #161b22;
+    --surface-border: #2a313c;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --track: #21262d;
+    --accent-total: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+    --accent-month: linear-gradient(90deg, #06b6d4, #3b82f6);
+    --accent-week: linear-gradient(90deg, #10b981, #84cc16);
+    --radius: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at top, var(--bg-gradient-a) 0%, var(--bg) 60%);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 20px 40px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: clamp(1.9rem, 5vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    margin-top: 8px;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+.clock {
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.card--total {
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+}
+
+.card__head h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.card__percent {
+    font-size: 2rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.bar {
+    height: 18px;
+    background: var(--track);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.bar__fill {
+    height: 100%;
+    width: 0;
+    background: var(--accent-total);
+    border-radius: 999px;
+    transition: width 0.6s ease-out;
+}
+
+.bar__fill--month {
+    background: var(--accent-month);
+}
+
+.bar__fill--week {
+    background: var(--accent-week);
+}
+
+.card__meta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.footer {
+    margin-top: 32px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+@media (max-width: 480px) {
+    .card__percent {
+        font-size: 1.6rem;
+    }
+}

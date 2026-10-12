@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Fortschritt 07.09.2026 - 30.04.2027</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <h1>Zeitfortschritt</h1>
+            <p class="subtitle" id="range-label">Zeitraum wird geladen</p>
+            <p class="clock" id="clock"></p>
+        </header>
+
+        <section class="card card--total" aria-labelledby="total-title">
+            <div class="card__head">
+                <h2 id="total-title">Gesamt</h2>
+                <span class="card__percent" id="total-percent">0,00 %</span>
+            </div>
+            <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="total-bar">
+                <div class="bar__fill" id="total-fill"></div>
+            </div>
+            <div class="card__meta">
+                <span id="total-range"></span>
+                <span id="total-remaining"></span>
+            </div>
+        </section>
+
+        <div class="grid">
+            <section class="card" aria-labelledby="month-title">
+                <div class="card__head">
+                    <h2 id="month-title">Aktueller Monat</h2>
+                    <span class="card__percent" id="month-percent">0,00 %</span>
+                </div>
+                <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="month-bar">
+                    <div class="bar__fill bar__fill--month" id="month-fill"></div>
+                </div>
+                <div class="card__meta">
+                    <span id="month-range"></span>
+                    <span id="month-remaining"></span>
+                </div>
+            </section>
+
+            <section class="card" aria-labelledby="week-title">
+                <div class="card__head">
+                    <h2 id="week-title">Aktuelle Woche</h2>
+                    <span class="card__percent" id="week-percent">0,00 %</span>
+                </div>
+                <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="week-bar">
+                    <div class="bar__fill bar__fill--week" id="week-fill"></div>
+                </div>
+                <div class="card__meta">
+                    <span id="week-range"></span>
+                    <span id="week-remaining"></span>
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer">
+            Wochen beginnen montags. Monats- und Wochenzeitraum werden auf den Gesamtzeitraum begrenzt.
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
