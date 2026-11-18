@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="dark">
-    <title>Fortschritt 07.09.2026 - 30.04.2027</title>
+    <meta name="color-scheme" content="light">
+    <title>Schultage 07.09.2026 - 30.04.2027</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main class="container">
         <header class="header">
-            <h1>Zeitfortschritt</h1>
+            <h1>Schultage bis zur RDP</h1>
             <p class="subtitle" id="range-label">Zeitraum wird geladen</p>
             <p class="clock" id="clock"></p>
         </header>
@@ -18,13 +18,12 @@
         <section class="card card--total" aria-labelledby="total-title">
             <div class="card__head">
                 <h2 id="total-title">Gesamt</h2>
-                <span class="card__percent" id="total-percent">0,00 %</span>
+                <span class="card__count" id="total-count">0 / 0</span>
             </div>
-            <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="total-bar">
-                <div class="bar__fill" id="total-fill"></div>
-            </div>
+            <div class="track track--total" id="total-track" role="progressbar" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"></div>
             <div class="card__meta">
                 <span id="total-range"></span>
+                <span id="total-status"></span>
                 <span id="total-remaining"></span>
             </div>
         </section>
@@ -33,13 +32,12 @@
             <section class="card" aria-labelledby="month-title">
                 <div class="card__head">
                     <h2 id="month-title">Aktueller Monat</h2>
-                    <span class="card__percent" id="month-percent">0,00 %</span>
+                    <span class="card__count" id="month-count">0 / 0</span>
                 </div>
-                <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="month-bar">
-                    <div class="bar__fill bar__fill--month" id="month-fill"></div>
-                </div>
+                <div class="track track--month" id="month-track" role="progressbar" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"></div>
                 <div class="card__meta">
                     <span id="month-range"></span>
+                    <span id="month-status"></span>
                     <span id="month-remaining"></span>
                 </div>
             </section>
@@ -47,20 +45,27 @@
             <section class="card" aria-labelledby="week-title">
                 <div class="card__head">
                     <h2 id="week-title">Aktuelle Woche</h2>
-                    <span class="card__percent" id="week-percent">0,00 %</span>
+                    <span class="card__count" id="week-count">0 / 0</span>
                 </div>
-                <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="week-bar">
-                    <div class="bar__fill bar__fill--week" id="week-fill"></div>
-                </div>
+                <div class="track track--week" id="week-track" role="progressbar" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"></div>
                 <div class="card__meta">
                     <span id="week-range"></span>
+                    <span id="week-status"></span>
                     <span id="week-remaining"></span>
                 </div>
             </section>
         </div>
 
         <footer class="footer">
-            Wochen beginnen montags. Monats- und Wochenzeitraum werden auf den Gesamtzeitraum begrenzt.
+            <p>
+                Gezählt werden nur Schultage (Montag bis Freitag) in Niederösterreich im Zeitraum
+                07.09.2026 bis 30.04.2027. Ferien, Feiertage und schulfreie Tage zählen nicht.
+                Die Figur springt jeden Schultag einen Punkt weiter und bleibt an schulfreien Tagen stehen.
+            </p>
+            <details class="footer__details">
+                <summary>Nicht gezählte Tage anzeigen</summary>
+                <ul id="free-list"></ul>
+            </details>
         </footer>
     </main>
 

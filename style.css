@@ -1,14 +1,13 @@
 :root {
-    --bg: #0d1117;
-    --bg-gradient-a: #161b22;
-    --surface: #161b22;
-    --surface-border: #2a313c;
-    --text: #e6edf3;
-    --text-muted: #8b949e;
-    --track: #21262d;
-    --accent-total: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
-    --accent-month: linear-gradient(90deg, #06b6d4, #3b82f6);
-    --accent-week: linear-gradient(90deg, #10b981, #84cc16);
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #475569;
+    --dot-border: #64748b;
+    --accent-total: #4338ca;
+    --accent-month: #0369a1;
+    --accent-week: #15803d;
     --radius: 16px;
 }
 
@@ -20,9 +19,7 @@
 
 body {
     min-height: 100vh;
-    background:
-        radial-gradient(ellipse at top, var(--bg-gradient-a) 0%, var(--bg) 60%);
-    background-attachment: fixed;
+    background: var(--bg);
     color: var(--text);
     font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
     line-height: 1.5;
@@ -60,14 +57,16 @@ body {
 }
 
 .card {
+    --accent: var(--accent-month);
     background: var(--surface);
-    border: 1px solid var(--surface-border);
+    border: 1.5px solid var(--surface-border);
     border-radius: var(--radius);
     padding: 24px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
 }
 
 .card--total {
+    --accent: var(--accent-total);
     margin-bottom: 20px;
 }
 
@@ -77,11 +76,15 @@ body {
     gap: 20px;
 }
 
+.grid .card:last-child {
+    --accent: var(--accent-week);
+}
+
 .card__head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .card__head h2 {
@@ -92,40 +95,101 @@ body {
     letter-spacing: 0.06em;
 }
 
-.card__percent {
+.card__count {
     font-size: 2rem;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
+    color: var(--accent);
 }
 
-.bar {
-    height: 18px;
-    background: var(--track);
-    border-radius: 999px;
-    overflow: hidden;
+/* Bahn mit einem Punkt pro Schultag. --dot ist der Punktdurchmesser, --figure die Figurenhoehe. */
+.track {
+    --dot: 14px;
+    --figure: 36px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    column-gap: calc(var(--dot) * 0.9);
+    row-gap: calc(var(--figure) * 0.85);
+    padding-top: var(--figure);
+    padding-bottom: 4px;
 }
 
-.bar__fill {
+.track--total {
+    --dot: 13px;
+    --figure: 34px;
+}
+
+.track--month {
+    --dot: 16px;
+    --figure: 42px;
+}
+
+.track--week {
+    --dot: 34px;
+    --figure: 80px;
+    column-gap: 0;
+}
+
+.week-group {
+    display: flex;
+    gap: calc(var(--dot) * 0.45);
+}
+
+.track--week .week-group {
+    gap: calc(var(--dot) * 0.7);
+}
+
+.dot {
+    display: block;
+    flex: none;
+    width: var(--dot);
+    height: var(--dot);
+    border-radius: 50%;
+    border: 2px solid var(--dot-border);
+    background: #ffffff;
+}
+
+.dot--done {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.dot--today {
+    background: var(--accent);
+    border-color: var(--text);
+    box-shadow: 0 0 0 3px #ffffff, 0 0 0 5px var(--accent);
+}
+
+.figure {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--figure);
+    width: calc(var(--figure) * 0.9);
+    pointer-events: none;
+    will-change: transform;
+}
+
+.figure svg {
+    display: block;
+    width: 100%;
     height: 100%;
-    width: 0;
-    background: var(--accent-total);
-    border-radius: 999px;
-    transition: width 0.6s ease-out;
+    overflow: visible;
 }
 
-.bar__fill--month {
-    background: var(--accent-month);
-}
-
-.bar__fill--week {
-    background: var(--accent-week);
+.track__empty {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    padding-bottom: 6px;
 }
 
 .card__meta {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px 16px;
     margin-top: 14px;
     color: var(--text-muted);
     font-size: 0.9rem;
@@ -135,11 +199,33 @@ body {
     margin-top: 32px;
     text-align: center;
     color: var(--text-muted);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+}
+
+.footer__details {
+    margin-top: 12px;
+    text-align: left;
+    display: inline-block;
+}
+
+.footer__details summary {
+    cursor: pointer;
+    color: var(--accent-total);
+    font-weight: 600;
+}
+
+.footer__details ul {
+    margin-top: 8px;
+    padding-left: 20px;
 }
 
 @media (max-width: 480px) {
-    .card__percent {
+    .card__count {
         font-size: 1.6rem;
+    }
+
+    .track--week {
+        --dot: 28px;
+        --figure: 66px;
     }
 }
